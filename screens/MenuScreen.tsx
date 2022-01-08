@@ -24,7 +24,7 @@ export default function ModalScreen(props: any) {
     <>
     <View style={styles.container}>
       <Avatar rounded source={userPhoto} />
-      <Text>Hello {userName}</Text>
+      <Text style={styles.text}>Hello {userName}</Text>
       <Text style={styles.text}>Logged in as {userEmail}</Text>
       <TouchableOpacity
         onPress={handleSignout}
@@ -33,48 +33,16 @@ export default function ModalScreen(props: any) {
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity>
     </View>
+    <View style={styles.container}>
+      <Text style={styles.closeText}>Swipe down to close</Text>
+    </View>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-    flexDirection:'row', // inline-block
-    flexWrap:'wrap',
-  },
-  listItemContainer: {
-    marginHorizontal: 5,
-    backgroundColor: 'tan',
-    width: 225,
-    flex: .5, // this squishes the boxes if set to .3
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightContainer: {
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  helpContainer: {
-    marginTop: 15,
-    marginHorizontal: 20,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  areaLinkText: {
-    textAlign: 'center',
-  },
   container: {
-    flex: 1,
+    flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -93,5 +61,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+  },
+  closeText: {
+    flex: 1
   }
 });

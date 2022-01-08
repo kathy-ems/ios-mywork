@@ -1,40 +1,27 @@
 import React from "react";
 import { Button, StyleSheet } from "react-native";
-import { View } from "./Themed";
+import { Text, View } from "../components/Themed";
 import { useNavigation } from '@react-navigation/native';
-import DescriptionComponent from "./DescriptionComponent";
+import DescriptionComponent from "../components/DescriptionComponent";
 
-const onPressOpenWork = () => {
-  // TODO: open URL or iPhone app
-}
-
-export default function EditScreenInfo(navigator: { route: { params: any } },
+export default function AcknowledgeScreen(navigator: { route: { params: any } },
 ) {
-  const navigation = useNavigation();
+  const navigation = useNavigation();  
   const task = navigator.route.params.task;
 
   return (
     <View style={styles.container}>
       <DescriptionComponent task={task} />
       <View style={styles.buttonContainer}>
-        <View style={styles.outlineButton}>
-          <Button
-            onPress={onPressOpenWork}
-            title='Open Work'
-            color='#00A3FF'
-            accessibilityLabel='Open Work button'
-          />
-        </View>
+      <View style={styles.descriptionContainer}>
+        <Text style={styles.acknowledgeText}>I acknowledge this task today</Text>
       </View>
-      <View style={styles.buttonContainer}>
        <View style={styles.outlineButton}>
         <Button
-          onPress={() =>
-            navigation.navigate('Acknowledge', { task })
-        }
-          title='Acknowledge'
+          onPress={() => navigation.navigate('Edit', {task})}
+          title='Confirm'
           color='#00A3FF'
-          accessibilityLabel='Acknowledge button'
+          accessibilityLabel='Confirm button'
           />
         </View>
       </View>
@@ -48,6 +35,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 25,
     flexDirection: 'column',
+  },
+  descriptionContainer: {
+    flex: 3,
+    padding: 10,
   },
   buttonContainer: {
     flex: 1,
@@ -70,5 +61,9 @@ const styles = StyleSheet.create({
   },
   bottomSpacer: {
     flex: 2,
-  }
+  },
+  acknowledgeText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });
