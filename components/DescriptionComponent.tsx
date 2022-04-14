@@ -1,22 +1,43 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Text, View } from "../components/Themed";
+import { Dimensions, StyleSheet, SafeAreaView, ScrollView, useWindowDimensions } from "react-native";
+import RenderHtml from 'react-native-render-html';
 
 export default function DescriptionComponent({ task }: any,
 ) {
+  const { width, height } = useWindowDimensions();
+  const description = {
+    html: task.description
+  }
+
+  const tagsStyles = {
+    body: {
+      fontSize: height < 750 ? 14 : 16
+    },
+  };
+
   return (
-    <View style={styles.descriptionContainer}>
-      <Text style={styles.descriptionText}>{task.description}</Text>
-    </View>
-  );
+    <SafeAreaView style={styles.descriptionContainer}>
+      <ScrollView style={styles.scrollView}>
+        <RenderHtml
+          contentWidth={width}
+          source={description}
+          tagsStyles={tagsStyles}
+          />
+      </ScrollView>
+    </SafeAreaView>
+ )
 }
 
+var screenWidth = Dimensions.get("window").width;
 const styles = StyleSheet.create({
   descriptionContainer: {
-    flex: 3,
-    padding: 10,
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    marginBottom: 10,
+    paddingHorizontal: screenWidth * .03,
+    marginTop: 15,
   },
-  descriptionText: {
-    fontSize: 15,
+  scrollView: {
+    paddingBottom: 10,
   },
 });

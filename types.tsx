@@ -16,24 +16,8 @@ declare global {
   }
 }
 
-export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Modal: undefined;
-  NotFound: undefined;
-  Login: undefined;
-  Edit: undefined;
-  Acknowledge: undefined;
-};
-
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
-  NativeStackScreenProps<RootStackParamList, Screen>;
-
-export type RootTabParamList = {
-  Weekly: undefined;
-  Daily: undefined;
-  Monthly: undefined;
-  Resources: undefined;
-};
+export const depts = ["ALL", "MFG", "FE", "MSAT"] as string[];
+export type Depts = typeof depts[number];
 
 export type Task = {
   id: string;
@@ -41,6 +25,35 @@ export type Task = {
   description: string | null;
   url: string | null;
   frequency: string;
+  acknowledgement: boolean;
+  actionName: string;
+  depts: Depts;
+};
+
+export type Record = {
+  id: string;
+  userEmail: string;
+  taskId: string;
+  date: string;
+};
+
+export type RootStackParamList = {
+  Root: NavigatorScreenParams<RootTabParamList> | {};
+  Modal: {};
+  NotFound: {};
+  Login: {};
+  Task: { task: Task };
+  Acknowledge: { task: Task };
+};
+
+export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, Screen>;
+
+export type RootTabParamList = {
+  Weekly: {};
+  Daily: {};
+  Monthly: {};
+  Resources: {};
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =

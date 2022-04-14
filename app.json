@@ -1,9 +1,10 @@
 {
   "expo": {
-    "name": "SupWork",
-    "slug": "SupWork",
-    "version": "1.0.0",
-    "owner": "katdevawesome",
+    "name": "MyWork",
+    "slug": "MyWork",
+    "description": "MyWork for SSFP Leaders App. This app assists SSFP Leaders in performing daily, weekly and monthly tasks.",
+    "version": "2.0.3",
+    "owner": "datatools",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -20,11 +21,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.roche.MyWork",
+      "buildNumber": "03302022.1"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       }
     },
