@@ -21,10 +21,10 @@ import ModalScreen from "../screens/MenuScreen";
 import AcknowledgeScreen from "../screens/AcknowledgeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import TasksScreen from "../screens/TasksScreen";
-import MenuOption from "../components/MenuOption";
+import Menu from "../components/MenuComponent";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
-import EditScreenInfo from "../components/EditScreenInfo";
+import TaskScreen from "../screens/TaskScreen";
 
 export default function Navigation({
   colorScheme,
@@ -61,20 +61,19 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Edit"
-        component={EditScreenInfo}
+        name="Task"
+        component={TaskScreen}
         options={({ route }) => ({ title: route.params?.task.name })}
       />
-      <Stack.Group screenOptions={{ presentation: "modal", title: 'Menu', }}>
+      <Stack.Group screenOptions={{ presentation: "modal", title: "Menu" }}>
+        <Stack.Screen name="Modal" component={ModalScreen} />
+      </Stack.Group>
       <Stack.Screen
-        name="Modal"
-        component={ModalScreen}
-      />
-    </Stack.Group>
-    <Stack.Screen
         name="Acknowledge"
         component={AcknowledgeScreen}
-        options={({ route }) => ({ title: `${route.params?.task.name}-Acknowledge` })}
+        options={({ route }) => ({
+          title: `${route.params?.task.name}-Acknowledge`,
+        })}
       />
     </Stack.Navigator>
   );
@@ -86,10 +85,8 @@ function RootNavigator() {
  */
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
-function BottomTabNavigator(navigator: { route: { params: any } }) {
+function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-  const userInfo = navigator.route.params;
-  const userPhoto = { uri: userInfo.photoUrl };
   const navigation = useNavigation();
 
   return (
@@ -107,10 +104,10 @@ function BottomTabNavigator(navigator: { route: { params: any } }) {
         )}
         options={() => ({
           title: "Daily",
-          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
-          headerRight: () => (
-            <MenuOption userName={userInfo} userPhoto={userPhoto} />
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="calendar" color={color} />
           ),
+          headerRight: () => <Menu />,
         })}
       />
       <BottomTab.Screen
@@ -120,10 +117,10 @@ function BottomTabNavigator(navigator: { route: { params: any } }) {
         )}
         options={() => ({
           title: "Weekly",
-          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
-          headerRight: () => (
-            <MenuOption userName={userInfo} userPhoto={userPhoto} />
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="calendar" color={color} />
           ),
+          headerRight: () => <Menu />,
         })}
       />
       <BottomTab.Screen
@@ -133,23 +130,23 @@ function BottomTabNavigator(navigator: { route: { params: any } }) {
         )}
         options={{
           title: "Monthly",
-          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
-          headerRight: () => (
-            <MenuOption userName={userInfo} userPhoto={userPhoto} />
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="calendar" color={color} />
           ),
+          headerRight: () => <Menu />,
         }}
       />
       <BottomTab.Screen
         name="Resources"
         children={() => (
-          <TasksScreen frequency="resource" navigation={navigation} />
+          <TasksScreen frequency="resources" navigation={navigation} />
         )}
         options={{
           title: "Resources",
-          tabBarIcon: ({ color }) => <TabBarIcon name="info-circle" color={color} />,
-          headerRight: () => (
-            <MenuOption userName={userInfo} userPhoto={userPhoto} />
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="info-circle" color={color} />
           ),
+          headerRight: () => <Menu />,
         }}
       />
     </BottomTab.Navigator>

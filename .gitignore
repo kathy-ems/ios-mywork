@@ -11,6 +11,8 @@ npm-debug.*
 web-build/
 firebase.js
 config/index.js
-
+.env*
+.easignore
+credentials
 # macOS
 .DS_Store
